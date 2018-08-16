@@ -15,13 +15,12 @@ Google font Coda (https://fonts.google.com/specimen/Coda)
 
 ## Instructions
 
-The starter project from Udacity had some HTML and CSS styling to display a static version of the Memory Game project.
-
-I did some changes to the styling.
 
 To start the game click on the first card. 
 
 Match the memory cards.
+
+Remark: I did some changes to the styling and I am using animate.css
 
 ## Feedback / Contributing
 Feedback is welcome - how did you solve the Quiz?

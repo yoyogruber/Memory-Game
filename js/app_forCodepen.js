@@ -142,7 +142,6 @@ function moveCounter() {
     }
 }
 // Start timer on first click on card
-/*
 var duration = document.querySelector('.duration');
 let seconds = 0;
 if (moves == 1) {
@@ -154,7 +153,7 @@ function timerfunction() {
     seconds++;
     console.log(seconds);
     duration.innerHTML = seconds;
-}*/
+}
 
 // Start timer with reload 
 let startTimer = setInterval(timer, 1000);
