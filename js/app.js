@@ -16,6 +16,7 @@ var openedCards = [];
 
 let matchedCards = document.getElementsByClassName("match")
 
+
 //2) Shuffle cards and start the game
 /*
  * Display the cards on the page
@@ -157,6 +158,7 @@ function timerfunction() {
 }*/
 
 // Start timer with reload 
+let seconds = 0;
 let startTimer = setInterval(timer, 1000);
 //Timer Function
 function timer() {
@@ -180,9 +182,16 @@ var modal = document.getElementById('myModal');
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
+// Get the button that opens the modal
+var playAgain = document.getElementById("playAgain");
+
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
     modal.style.display = "none";
+}
+// When the user clicks the button, open the modal 
+playAgain.onclick = function() {
+    location.reload();
 }
 
 // When the user clicks anywhere outside of the modal, close it
@@ -209,8 +218,6 @@ function addMessage() {
     message.innerHTML = `You finished the game in ${seconds} seconds.<br>
      You made ${moves} moves.<br>
      You have ${howManyStars} stars.`;
-    var howManyStars2 = howManyStars.length();
-    message.innerHTML = `You finished the game in ${seconds} seconds.<br> You have ${howManyStars2} <br> stars.`;
 }
 
 // set up of an event listener for each card
