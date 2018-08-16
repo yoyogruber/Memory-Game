@@ -7,9 +7,12 @@
 * [Feedback / Contributing](#contributing)
 
 ## References
-I used the [animate css Library](https://github.com/daneden/animate.css) 
+I used the [animate css Library](https://github.com/daneden/animate.css)
+
 And [jQuery](https://jquery.com/)
+
 [font awesome](https://fontawesome.com/)
+
 Google font Coda (https://fonts.google.com/specimen/Coda) 
 
 
