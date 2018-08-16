@@ -108,7 +108,7 @@ h1 {
     margin: 0 5px 0 0;
 }
 
-.score-panel .stars li {
+.stars li {
     list-style: none;
     display: inline-block;
 }
@@ -140,6 +140,7 @@ h1 {
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    list-style: none;
 }
 
 /* The Close Button */

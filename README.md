@@ -8,6 +8,9 @@
 
 ## References
 I used the [animate css Library](https://github.com/daneden/animate.css) 
+And [jQuery](https://jquery.com/)
+[font awesome](https://fontawesome.com/)
+Google font Coda (https://fonts.google.com/specimen/Coda) 
 
 
 ## Instructions
@@ -17,8 +20,9 @@ The starter project from Udacity had some HTML and CSS styling to display a stat
 I did some changes to the styling.
 
 To start the game click on the first card. 
-The 
+
+Match the memory cards.
 
 ## Feedback / Contributing
-Feedback is welcom - how did you solve the Quiz
+Feedback is welcome - how did you solve the Quiz?
 

@@ -1,5 +1,4 @@
 // The following code is broken into several section to increase readability
-
 // Section 1: All variables that are needed
 // Create a list that holds all of your cards
 let card = document.getElementsByClassName("card");
@@ -12,7 +11,7 @@ let counter = document.querySelector('.moves');
 let deck = document.getElementById("card-deck");
 
 // OPENED CARDS - An array to store the opened cards in
-    var openedCards = [];
+var openedCards = [];
 
 let matchedCards = document.getElementsByClassName("match")
 
@@ -25,7 +24,8 @@ let matchedCards = document.getElementsByClassName("match")
 //2) Shuffle cards and start the game
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -42,132 +42,143 @@ function shuffle(array) {
 document.body.onload = startGame();
 
 // startGame function that adds the icons to the html and resets stuff
-function startGame(){
-// run the shuffle function
-cards=shuffle(cards);
-// remove all classes from all cards + shuffle classes that show items
-    for (var i = 0; i < cards.length; i++){
+function startGame() {
+    // run the shuffle function
+    cards = shuffle(cards);
+    // remove all classes from all cards + shuffle classes that show items
+    for (var i = 0; i < cards.length; i++) {
         deck.innerHTML = "";
-            [].forEach.call(cards, function(item) {
+        [].forEach.call(cards, function(item) {
             deck.appendChild(item);
-            });
+        });
         cards[i].classList.remove("show", "open", "match", "disabled");
     }
-//reset moves
+    //reset moves
 
 }
 
 
-    // Toggles open and show class to display cards
-    var displayCard = function (){
-    	if (!this.classList.contains('disabled') && !this.classList.contains('match')) {
-    		this.classList.toggle("open");
-    		this.classList.toggle("show");
-    		this.classList.toggle("disabled");
-         }
+// Toggles open and show class to display cards
+var displayCard = function() {
+    if (!this.classList.contains('disabled') && !this.classList.contains('match')) {
+        this.classList.toggle("open");
+        this.classList.toggle("show");
+        this.classList.toggle("disabled");
+    }
 
 };
 
- function moveCounter () {
-       	moves++;
-       	counter.innerHTML = moves;
-       }
+function moveCounter() {
+    moves++;
+    counter.innerHTML = moves;
+}
 
 // 3) compare opened cards if they match
 
-function cardOpen(){
-openedCards.push(this);
-var len = openedCards.length;
-if (len === 2) {
-	moveCounter();
-	cards.forEach(function(item) {
+function cardOpen() {
+    openedCards.push(this);
+    var len = openedCards.length;
+    if (len === 2) {
+        moveCounter();
+        cards.forEach(function(item) {
             item.classList.add('disabled');
-            });
-	//compare
-	//console.log (openedCards[0].type);
-	//console.log(openedCards[0].innerHTML, openedCards[1].innerHTML);
+        });
+        //compare
+        //console.log (openedCards[0].type);
+        //console.log(openedCards[0].innerHTML, openedCards[1].innerHTML);
 
-	if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
-		matched();
-		} else {
-			unmatched();
-		}
-	}
+        if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
+            matched();
+        } else {
+            unmatched();
+        }
+    }
 
-} 
+}
 // define matched and unmatched
 // A) they match
 function matched() {
-    openedCards[0].classList.add('match', 'disabled', 'animated','flash');
+    openedCards[0].classList.add('match', 'disabled', 'animated', 'flash');
     openedCards[1].classList.add('match', 'disabled', 'animated', 'flash');
     openedCards[0].classList.remove('show', 'open');
     openedCards[1].classList.remove('show', 'open');
-	openedCards = [];
-	enable();
+    openedCards = [];
+    enable();
 }
 
 // B they do not match: 1) add a class that shows that they dont match 2) remove classes
 function unmatched() {
-	openedCards[0].classList.add("unmatched", 'animated', 'flipInY');
-	openedCards[0].classList.add("unmatched", 'animated', 'flipInY');
-	//Array.prototype.filter.call(cards, function(card){
+    openedCards[0].classList.add("unmatched", 'animated', 'flipInY');
+    openedCards[0].classList.add("unmatched", 'animated', 'flipInY');
+    //Array.prototype.filter.call(cards, function(card){
     //    card.classList.add('disabled');
     //});
 
-	setTimeout(function(){
-		openedCards[0].classList.remove("show", "open", "unmatched", "disabled");
-		openedCards[1].classList.remove("show", "open", "unmatched", "disabled");
-		openedCards = [];
-		enable();
-		},800);
+    setTimeout(function() {
+        openedCards[0].classList.remove("show", "open", "unmatched", "disabled");
+        openedCards[1].classList.remove("show", "open", "unmatched", "disabled");
+        openedCards = [];
+        enable();
+    }, 800);
 }
+//4. TO DO: Disable the matched cards and keep the unmatched cards enabled for clicking
 
 //function enable again unmatched
-  function enable() {
-	cards.forEach(function(item) {
-			if (!item.classList.contains('match')){
+function enable() {
+    cards.forEach(function(item) {
+        if (!item.classList.contains('match')) {
             item.classList.remove('disabled');
-            }});
+        }
+    });
 }
 
-// 5 moves time and star rating
- function moveCounter () {
-       	moves++;
-       	counter.innerHTML = moves;
-       }
+// 5 moves time and star rating count
+let first = document.querySelector('.first');
+let second = document.querySelector('.second');
 
+function moveCounter() {
+    moves++;
+    counter.innerHTML = moves;
+    //Begin removing stars based on move count  
+    if (moves > 13 && moves < 17) {
+        first.style.visibility = 'hidden';
+    } else if (moves > 17) {
+        second.style.visibility = 'hidden';
+    }
+}
 // Start timer on first click on card
 var duration = document.querySelector('.duration');
 let seconds = 0;
-if(moves ==1){
-var timer = setInterval(timerfunction, 1000);
-cosole.log("duration should start" seconds);
+if (moves == 1) {
+    var timer = setInterval(timerfunction, 1000);
+    cosole.log("duration should start"+ seconds);
 }
 
-function timerfunction () {
-	seconds++;
+function timerfunction() {
+    seconds++;
     console.log(seconds);
     duration.innerHTML = seconds;
-  }
+}
 
 // Start timer with reload 
 let startTimer = setInterval(timer, 1000);
 //Timer Function
 function timer() {
-  seconds++;
-  document.querySelector("#timer").innerHTML = seconds;
+    seconds++;
+    document.querySelector("#timer").innerHTML = seconds;
 }
 
 
 //jquery how to implement restart -- reload the whole thing
-$(document).ready(function(){
-  //TODO: Reset page.
-  $('.restart').click(function(){
-      location.reload();
-  });
+$(document).ready(function() {
+    //TODO: Reset page.
+    $('.restart').click(function() {
+        location.reload();
+    });
 });
 
 //function finished matched == 16 show modal
+//6. TO DO - Show a congratulations modal when the player finished the game - show the players time, moves and star rating
 // Get the modal
 var modal = document.getElementById('myModal');
 
@@ -187,31 +198,35 @@ window.onclick = function(event) {
     }
 }
 
-function finished (){
-	if (matchedCards.lentgh == 16){
-		clearInterval(timer);
-		//make modal visible
-		modal.style.display = "block";
-
-
-	}
-
-
+function finished() {
+    if (matchedCards.length == 16) {
+        clearInterval(timer);
+        //make modal visible
+        modal.style.display = "block";
+        addMessage();
+    }
 }
 
 function addMessage() {
-  clearInterval(startTimer);
-  const message = document.getElementById('message');
-  message.innerText = `You finished the game in ${time} seconds. You have ${howManyStars} stars.`;
+    clearInterval(startTimer);
+    var howManyStars = document.querySelector(".stars").innerHTML;
+    var message = document.getElementById('message');
+    //console.log(howManyStars);
+    message.innerHTML = `You finished the game in ${seconds} seconds.<br>
+     You made ${moves} moves.<br>
+     You have ${howManyStars} stars.`;
+    var howManyStars2 = howManyStars.length();
+    message.innerHTML = `You finished the game in ${seconds} seconds.<br> You have ${howManyStars2} <br> stars.`;
+
 }
 
-  // set up of an event listener for each card
-    for (var i = 0; i < cards.length; i++){
-        card = cards[i];
-        card.addEventListener("click", displayCard);
-        card.addEventListener("click", cardOpen);
-      	card.addEventListener("click",finished);
-    };
+// set up of an event listener for each card
+for (var i = 0; i < cards.length; i++) {
+    card = cards[i];
+    card.addEventListener("click", displayCard);
+    card.addEventListener("click", cardOpen);
+    card.addEventListener("click", finished);
+};
 
 
 /*
