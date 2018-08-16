@@ -157,3 +157,36 @@ h1 {
     text-decoration: none;
     cursor: pointer;
 }
+@media (min-width: 768px) {
+
+.container {
+        font-size: 22px;
+    }
+
+    .deck {
+        width: 660px;
+        height: 680px;
+    }
+
+    .deck .card {
+        height: 125px;
+        width: 125px;
+    }
+
+    .popup {
+        width: 60%;
+    }
+}
+
+
+@media (max-width: 410px) {
+
+    .deck {
+        width: 85%;
+    }
+
+    .deck .card {
+        height: 4.7rem;
+        width: 4.7rem;
+    }
+}
