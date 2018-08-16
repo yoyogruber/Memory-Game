@@ -14,6 +14,7 @@ let deck = document.getElementById("card-deck");
 // OPENED CARDS - An array to store the opened cards in
     var openedCards = [];
 
+let matchedCards = document.getElementsByClassName("match")
 
 /*
  * Display the cards on the page
@@ -54,7 +55,6 @@ cards=shuffle(cards);
     }
 //reset moves
 
-
 }
 
 
@@ -71,20 +71,21 @@ cards=shuffle(cards);
  function moveCounter () {
        	moves++;
        	counter.innerHTML = moves;
-       	//console.log(moves);
-		//console.log(counter);
        }
 
-// 3 compare opened cards if they match
+// 3) compare opened cards if they match
 
 function cardOpen(){
 openedCards.push(this);
 var len = openedCards.length;
 if (len === 2) {
 	moveCounter();
+	cards.forEach(function(item) {
+            item.classList.add('disabled');
+            });
 	//compare
 	//console.log (openedCards[0].type);
-	console.log(openedCards[0].innerHTML, openedCards[1].innerHTML);
+	//console.log(openedCards[0].innerHTML, openedCards[1].innerHTML);
 
 	if (openedCards[0].innerHTML === openedCards[1].innerHTML) {
 		matched();
@@ -97,17 +98,18 @@ if (len === 2) {
 // define matched and unmatched
 // A) they match
 function matched() {
-    openedCards[0].classList.add('match', 'disabled');
-    openedCards[1].classList.add('match', 'disabled');
+    openedCards[0].classList.add('match', 'disabled', 'animated','flash');
+    openedCards[1].classList.add('match', 'disabled', 'animated', 'flash');
     openedCards[0].classList.remove('show', 'open');
     openedCards[1].classList.remove('show', 'open');
-    openedCards = [];
+	openedCards = [];
+	enable();
 }
 
 // B they do not match: 1) add a class that shows that they dont match 2) remove classes
 function unmatched() {
-	openedCards[0].classList.add("unmatched");
-	openedCards[0].classList.add("unmatched");
+	openedCards[0].classList.add("unmatched", 'animated', 'flipInY');
+	openedCards[0].classList.add("unmatched", 'animated', 'flipInY');
 	//Array.prototype.filter.call(cards, function(card){
     //    card.classList.add('disabled');
     //});
@@ -116,19 +118,99 @@ function unmatched() {
 		openedCards[0].classList.remove("show", "open", "unmatched", "disabled");
 		openedCards[1].classList.remove("show", "open", "unmatched", "disabled");
 		openedCards = [];
+		enable();
 		},800);
 }
 
+//function enable again unmatched
+  function enable() {
+	cards.forEach(function(item) {
+			if (!item.classList.contains('match')){
+            item.classList.remove('disabled');
+            }});
+}
+
+// 5 moves time and star rating
+ function moveCounter () {
+       	moves++;
+       	counter.innerHTML = moves;
+       }
+
+// Start timer on first click on card
+var duration = document.querySelector('.duration');
+let seconds = 0;
+if(moves ==1){
+var timer = setInterval(timerfunction, 1000);
+cosole.log("duration should start" seconds);
+}
+
+function timerfunction () {
+	seconds++;
+    console.log(seconds);
+    duration.innerHTML = seconds;
+  }
+
+// Start timer with reload 
+let startTimer = setInterval(timer, 1000);
+//Timer Function
+function timer() {
+  seconds++;
+  document.querySelector("#timer").innerHTML = seconds;
+}
 
 
+//jquery how to implement restart -- reload the whole thing
+$(document).ready(function(){
+  //TODO: Reset page.
+  $('.restart').click(function(){
+      location.reload();
+  });
+});
 
+//function finished matched == 16 show modal
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+function finished (){
+	if (matchedCards.lentgh == 16){
+		clearInterval(timer);
+		//make modal visible
+		modal.style.display = "block";
+
+
+	}
+
+
+}
+
+function addMessage() {
+  clearInterval(startTimer);
+  const message = document.getElementById('message');
+  message.innerText = `You finished the game in ${time} seconds. You have ${howManyStars} stars.`;
+}
 
   // set up of an event listener for each card
     for (var i = 0; i < cards.length; i++){
         card = cards[i];
         card.addEventListener("click", displayCard);
         card.addEventListener("click", cardOpen);
-      //  card.addEventListener("click",congratulations);
+      	card.addEventListener("click",finished);
     };
 
 
